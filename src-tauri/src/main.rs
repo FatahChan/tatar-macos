@@ -42,18 +42,18 @@ fn main() {
                 .unwrap();
         }))
         .system_tray(system_tray)
-        .setup(|app| {
+        .setup(|_app| {
             #[cfg(debug_assertions)]
             {
-                let handle = app.handle();
-                let id = app.listen_global("single-instance", move |_| {
+                let handle = _app.handle();
+                let id = _app.listen_global("single-instance", move |_| {
                     handle
                         .get_window("main")
                         .unwrap()
                         .show()
                         .expect("could not show main window");
                 });
-                app.unlisten(id);
+                _app.unlisten(id);
             }
             Ok(())
         })
